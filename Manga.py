@@ -15,7 +15,7 @@ def download_manga(link, path):
 
 if __name__ == '__main__':
 
-    parser = OptionParser(usage="$prog http://www.readmanga.me/manganame [path]")
+    parser = OptionParser(usage=" %prog http://www.readmanga.me/manganame [path]")
     parser.add_option("-l", "--link",
                       help="link to manga on http://www.readmanga.me or http://www.adultmanga.ru",
                       )
