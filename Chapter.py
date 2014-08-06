@@ -18,7 +18,7 @@ def worker(link, path, img_name):
 
 
 
-def download_chapter(link, manga_name=None):
+def download_chapter(link, path, manga_name=None,):
     g = Grab()
     g.go(link)
     chapter_name = g.doc.select('//a[@href="#header"][@property="v:title"]/text()')
@@ -26,18 +26,14 @@ def download_chapter(link, manga_name=None):
     if not manga_name:
         manga_name = g.doc.select('//a[@class="manga-link"]/text()')
 
-    #print chapter_name.text() manga_name.text()
+    current_path = path + '/%s/%s' % (manga_name.text(), chapter_name.text())
+    current_path = os.path.expanduser(current_path)
 
-
-
-    path = '~/Manga/%s/%s' % (manga_name.text(), chapter_name.text())
-    path = os.path.expanduser(path)
-
-    if os.path.isdir(path) or  os.path.isfile(path+'.rar'):
+    if os.path.isdir(current_path) or os.path.isfile(current_path+'.rar'):
         return 0
     else:
         try:
-            os.makedirs(path)
+            os.makedirs(current_path)
         except os.error:
             pass
 
@@ -46,9 +42,8 @@ def download_chapter(link, manga_name=None):
 
     processlist = []
     for img in img_list:
-        #print img[img.rfind('/')+1:]
         img_name = img[img.rfind('/')+1:]
-        processlist.append(multiprocessing.Process(target=worker, args=(img, path, img_name)))
+        processlist.append(multiprocessing.Process(target=worker, args=(img, current_path, img_name)))
 
     for proc in processlist:
         proc.start()
@@ -56,11 +51,11 @@ def download_chapter(link, manga_name=None):
     for proc in processlist:
         proc.join()
 
-    create_zip(path)
-    shutil.rmtree(path)
+    create_zip(current_path)
+    shutil.rmtree(current_path)
 
 
 
 
 if __name__ == '__main__':
-    download_chapter('http://adultmanga.ru/sankarea/vol7/34?mature=1')
+    download_chapter('http://readmanga.me/horimiya/vol1/1')
