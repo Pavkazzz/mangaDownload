@@ -1,3 +1,5 @@
+#coding=utf-8
+
 from grab import Grab
 import re
 import os
@@ -11,6 +13,8 @@ import shutil
 
 def worker(link, path, img_name):
     p = requests.get(link)
+
+    print path
     out = open(os.path.join(path, img_name), "wb")
     out.write(p.content)
     out.close()
@@ -26,8 +30,11 @@ def download_chapter(link, path, manga_name=None, zip=False):
     if not manga_name:
         manga_name = g.doc.select('//a[@class="manga-link"]/text()')
 
-    current_path = path + '/%s/%s' % (manga_name.text(), chapter_name.text())
+    current_path = os.path.join(path, manga_name.text())
+    current_path = os.path.join(current_path, chapter_name.text())
     current_path = os.path.expanduser(current_path)
+    #Hack for windows
+    current_path = current_path.replace('.', '')
 
     if os.path.isdir(current_path) or os.path.isfile(current_path+'.rar'):
         return 0
@@ -54,3 +61,9 @@ def download_chapter(link, path, manga_name=None, zip=False):
     if zip:
         create_zip(current_path)
         shutil.rmtree(current_path)
+
+
+
+
+if __name__ == '__main__':
+    download_chapter('http://readmanga.me/naruto/vol71/690', '~/Manga')
