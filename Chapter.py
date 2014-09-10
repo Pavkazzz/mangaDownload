@@ -18,7 +18,7 @@ def worker(link, path, img_name):
 
 
 
-def download_chapter(link, path, manga_name=None,):
+def download_chapter(link, path, manga_name=None, zip=False):
     g = Grab()
     g.go(link)
     chapter_name = g.doc.select('//a[@href="#header"][@property="v:title"]/text()')
@@ -51,11 +51,6 @@ def download_chapter(link, path, manga_name=None,):
     for proc in processlist:
         proc.join()
 
-    create_zip(current_path)
-    shutil.rmtree(current_path)
-
-
-
-
-if __name__ == '__main__':
-    download_chapter('http://readmanga.me/horimiya/vol1/1')
+    if zip:
+        create_zip(current_path)
+        shutil.rmtree(current_path)

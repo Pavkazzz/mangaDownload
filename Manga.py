@@ -8,7 +8,7 @@ def download_manga(link, path):
     g.go(link)
     for item in g.doc.select('//table[@id="chapters-list"]//a/@href'):
         chapter = link[:link.rfind('/')] + item.node + '?mature=1'
-        download_chapter(chapter, path)
+        download_chapter(chapter, path, zip=False)
 
 
 
