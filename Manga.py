@@ -11,13 +11,13 @@ def download_manga(link, path):
         download_chapter(chapter, path, zip=False)
 
 
-
-
 if __name__ == '__main__':
 
-    parser = OptionParser(usage=" %prog http://www.readmanga.me/manganame [path]")
+    parser = OptionParser(
+        usage=" %prog http://www.readmanga.me/manganame [path]")
     parser.add_option("-l", "--link",
-                      help="link to manga on http://www.readmanga.me or http://www.adultmanga.ru",
+                      help="link to manga on http://www.readmanga.me \
+                      or http://www.adultmanga.ru",
                       )
     parser.add_option("-f", "--file", default='~/Manga/',
                       help="destination folder", metavar="~/Manga/")
