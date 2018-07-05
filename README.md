@@ -1,10 +1,10 @@
-#MangaDownload
-Download russian manga from [readmanga.me](http://readmanga.me/ "readmanga.me") and [adultmanga.ru](http://adultmanga.ru/ "adultmanga.me")
+# MangaDownload
+Download russian manga from [readmanga.me](http://readmanga.me/ "readmanga.me") 
 
-#Usage
+## Usage
 
-python2 Manga.py http://readmanga.me/naruto
+python3 Manga.py http://readmanga.me/naruto
 
-#Requirements
+## Requirements
 
-pip install pycurl lxml grab requests
+pip install pycurl lxml grab requests ast
