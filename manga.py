@@ -1,13 +1,14 @@
 from grab import Grab
-from Chapter import download_chapter
+from chapter import download_chapter
 from optparse import OptionParser
 
 
 def download_manga(link, path):
     g = Grab()
-    g.go(link)
-    for item in g.doc.select('//table[@id="chapters-list"]//a/@href'):
-        chapter = link[:link.rfind('/')] + item.node + '?mature=1'
+    g.go(link, log_file="manga.html")
+
+    for item in g.doc.select('//div[@class="expandable chapters-link"]//table//a/@href'):
+        chapter = link[:link.rfind('/')] + item._node + '?mature=1'
         download_chapter(chapter, path, zip=False)
 
 
