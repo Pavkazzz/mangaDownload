@@ -31,7 +31,7 @@ def download_chapter(link, path, manga_name=None, zip=False):
     # Hack for windows
     current_path = current_path.replace('.', '')
 
-    if os.path.isdir(current_path) or os.path.isfile(current_path + '.rar'):
+    if os.path.isdir(current_path) or os.path.isfile(current_path + '.rar') or os.path.isfile(current_path + '.zip'):
         return 0
     else:
         try:
@@ -60,7 +60,7 @@ def download_chapter(link, path, manga_name=None, zip=False):
         proc.join()
 
     if zip:
-        create_zip(current_path)
+        create_zip(current_path, zip)
         shutil.rmtree(current_path)
 
 
