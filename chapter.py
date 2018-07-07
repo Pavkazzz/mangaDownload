@@ -30,14 +30,13 @@ def download_chapter(link, path, manga_name=None, zip=False):
     current_path = os.path.expanduser(current_path)
     # Hack for windows
     current_path = current_path.replace('.', '')
-
-    if os.path.isdir(current_path) or os.path.isfile(current_path + '.rar') or os.path.isfile(current_path + '.zip'):
-        return 0
-    else:
-        try:
-            os.makedirs(current_path)
-        except os.error:
-            pass
+    for type in (".rar", ".zip", ".cbr", ".cbz", ""):
+        if os.path.isfile(current_path + type):
+            return 0
+    try:
+        os.makedirs(current_path)
+    except os.error:
+        pass
 
     img_list = literal_eval(re.findall('\[\[.+\]\]', g.doc.body.decode('utf-8'))[0])
     img_one = []

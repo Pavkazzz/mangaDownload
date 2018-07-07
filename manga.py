@@ -23,8 +23,8 @@ if __name__ == '__main__':
     parser.add_option("-f", "--file", default='~/Manga/',
                       help="destination folder", metavar="~/Manga/")
 
-    parser.add_option("-z", "--zip", default=False, help="zipping type")
+    parser.add_option("-t", "--type", default=False, help="format zipping type")
 
     (options, args) = parser.parse_args()
-    zipping_type = options.__dict__.get('zip')
+    zipping_type = options.__dict__.get('type')
     download_manga(args[0], options.__dict__.get('file'), zipping_type)
