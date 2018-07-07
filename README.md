@@ -1,6 +1,5 @@
 # MangaDownload
-Download russian manga from [readmanga.me](http://readmanga.me/ "readmanga.me") 
-
+Download russian manga from [readmanga.me](http://readmanga.me/ "readmanga.me") and [mintmanga.com](http://mintmanga.com/ "mintmanga.com") 
 ## Usage
 python3 Manga.py http://readmanga.me/naruto
 
